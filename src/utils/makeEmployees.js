@@ -4,7 +4,7 @@ const makeEmployee = () => {
    const uniqueNames = uniqueNamesGenerator({ 
        dictionaries: [names, names], 
        length: 2, 
-        separator: ' '
+       separator: ' '
     }).split(' ');
 
     return {
