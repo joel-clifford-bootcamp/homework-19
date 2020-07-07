@@ -4,6 +4,8 @@ import FilterDropdown from "../FilterDropdown"
 function ColumnHeader(props){
     const [sortDirection, setSortDirection] = useState(0)
 
+    console.log(props.fieldName)
+
     const toggle = (direction) => setSortDirection(direction => {
         if(direction === 0)
             return 1;
@@ -29,7 +31,7 @@ function ColumnHeader(props){
             <button className="btn btn-sm" onClick={() => toggle(sortDirection)}>
                 <span className={getArrow(sortDirection)}></span>
             </button>
-            <FilterDropdown />
+            <FilterDropdown  fieldName={props.fieldName} filterColumns={props.filterColumns}/>
         </span>
     </th>
 }
