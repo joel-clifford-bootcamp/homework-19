@@ -7,7 +7,9 @@ function TableBody(props) {
   return (
     <tbody>
       {props.data.map(item => (
-        <TableRow item={item} />
+        <TableRow 
+          key={item.employeeId}
+          item={item} />
       ))}
     </tbody>
   );
