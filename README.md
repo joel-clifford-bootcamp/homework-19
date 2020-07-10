@@ -1,6 +1,16 @@
 # Unit 19 React Homework: Employee Directory
 
-## Overview
+## Description
+
+A table that displays employees by then name and id number.
+
+Table is populated with random employees with names generated using the unique-names-generator.
+
+The table can then be sorted or filtered by Last Name using the inputs above it.
+
+Note: Table column headers contain clickable sort arrows and filter dropdowns. The intent was to allow the table to be filtered and sorted by multiple columns at once, but this was too much work to complete by the submission deadline. 
+
+## Assignment Overview
 
 For this assignment, you'll create a employee directory with React. This assignment will require you to break up your application's UI into components, manage component state, and respond to user events.
 
