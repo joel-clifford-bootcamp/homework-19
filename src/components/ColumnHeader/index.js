@@ -4,7 +4,7 @@ import FilterDropdown from "../FilterDropdown"
 function ColumnHeader(props){
     const [sortDirection, setSortDirection] = useState(0)
 
-    console.log(props.fieldName)
+    // console.log(props.fieldName)
 
     const toggle = (direction) => setSortDirection(direction => {
         if(direction === 0)
