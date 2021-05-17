@@ -12,7 +12,7 @@ function Dropdown(props) {
             <option>A - Z</option>
             <option>Z - A</option>
         </select>
-        </div>
+        </div>  
     )
 }
 
