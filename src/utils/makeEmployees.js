@@ -1,16 +1,14 @@
-const {uniqueNamesGenerator, names} = require('unique-names-generator');
+const faker = require('faker');
 
 const makeEmployee = () => {
-   const uniqueNames = uniqueNamesGenerator({ 
-       dictionaries: [names, names], 
-       length: 2, 
-       separator: ' '
-    }).split(' ');
+   const[ firstName, lastName ] = faker.name.findName().split(' ');
 
     return {
         employeeId: Math.floor(10000 * Math.random()) + Math.floor(1000 * Math.random()),
-        firstName: uniqueNames[0],
-        lastName: uniqueNames[1]
+        firstName: firstName,
+        lastName: lastName,
+        department:  faker.name.jobArea(),
+        phoneNumber: faker.phone.phoneNumberFormat(1)
     }
 }
 
