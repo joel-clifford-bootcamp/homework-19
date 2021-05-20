@@ -1,32 +1,57 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import Wrapper from "./components/Wrapper/index"
 import Title from "./components/Title/index"
 import Table from "./components/Table"
-
+import ReactTable from "./components/ReactTable"
 import makeEmployees from "./utils/makeEmployees"
+import SelectColumnFilter from "./components/SelectColumnFilter"
+import FilterDropDown from "./components/FilterDropdown";
 
-class App extends Component { 
+function App() { 
 
-  employees = [];
+  let collectionSize = 15;
 
-  state = {
-    collection: this.employees
-  };
+  const [collection, setCollection] = useState(makeEmployees(collectionSize));
 
-  // Populate list with employees when component mounts
-  componentDidMount(){
-    this.employees = makeEmployees(15);
-    this.setState( { collection: this.employees } );
+  const changeCollectionSize = size => 
+  {
+    collectionSize = size;
+    setCollection(makeEmployees(collectionSize));
   }
 
-  render() {
+  const columns = React.useMemo(() => [
+    {
+      Header: "#",
+      accessor: "employeeId",
+      canFilter: false
+    },
+    {
+      Header:  "First Name",
+      accessor: "firstName",
+    },
+    {
+      Header: "Last Name",
+      accessor: "lastName"   
+    },
+    {
+      Header: "Department",
+      accessor: "department",
+      Filter: SelectColumnFilter,
+      filter: "equal"
+    },
+    {
+      Header: "Phone",
+      accessor:  "phoneNumber"
+    }
+  ],
+  []);
+
     return (
-      <Wrapper>
+      <Wrapper changeCollectionSize={changeCollectionSize} collectionSize={collectionSize}>
         <Title title="Employees"/>
-        <Table collection={this.state.collection} changeCollection={this.setState}/>
+        <ReactTable columns={columns} data={collection}/>
       </Wrapper> 
     )
-  }
 };
 
 export default App;
