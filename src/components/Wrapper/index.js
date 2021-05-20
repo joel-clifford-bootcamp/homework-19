@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import "./style.css";
 
-function Wrapper(props) {
+function Wrapper({children, changeCollectionSize, collectionSize}) {
+  
+  const [size, setSize] = useState(collectionSize);
+  
   return <div className="container-fluid">
-    {props.children}
+    {children}
     <div className="modal fade" id="modalForm" role="dialog">
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
@@ -16,12 +19,12 @@ function Wrapper(props) {
           <div className="modal-body">
             <form className="form-inline">
               <label htmlFor="formControlRange">How Many Employees?</label>
-              <input type="range" className="form-control-range" id="formControlRange"></input>
+              <input type="range" defaultValue={collectionSize} onChange={e => setSize(e.target.value)} className="form-control-range" id="formControlRange"></input>
             </form>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" className="btn btn-primary">Update</button>
+            <button type="button" className="btn btn-primary" onClick={() => changeCollectionSize(size)} data-dismiss="modal">Update</button>
           </div>
         </div>
       </div>
