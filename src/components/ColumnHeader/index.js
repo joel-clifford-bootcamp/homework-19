@@ -8,32 +8,31 @@ const getNextSortDirection = currentDirection =>
         "none" : 
         sortDirections[sortDirections.indexOf(currentDirection) + 1];    
 
-const sortDirectionClassNameMap = {
-    "descending": "fas fa-sort-down",
-    "ascending": "fas fa-sort-up",
-    "none": "fas fa-sort"
-}
-
 
 function ColumnHeader(props){
 
-    let sortDirection = props.sortDescription.fieldName === props.fieldName ? 
-        props.sortDescription.direction : "none";
+    // let sortDirection = props.sortDescription.fieldName === props.fieldName ? 
+    //     props.sortDescription.direction : "none";
 
-    const toggleSort = () =>  {
-        let nextSortDirection = getNextSortDirection(sortDirection);
-        props.sort({fieldName: props.fieldName,  direction: nextSortDirection});
-        props.updateCollection();
-    }
+    // const toggleSort = () =>  {
+    //     let nextSortDirection = getNextSortDirection(sortDirection);
+    //     props.sort({fieldName: props.fieldName,  direction: nextSortDirection});
+    //     props.updateCollection();
+    // }
+    const column = props.column;
 
     return <th scope="col">
         <span>
-            {props.columnName}
+            {props.children}
             {" "}
-            <button className="btn btn-sm" onClick={() => toggleSort()}>
-                <span className={sortDirectionClassNameMap[sortDirection]}></span>
+            <button className="btn btn-sm" {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <span className={column.isSorted
+                      ? column.isSortedDesc
+                      ? 'fas fa-sort-down'
+                      : 'fas fa-sort-up'
+                      : 'fas fa-sort'}></span>
             </button>
-            <FilterDropdown fieldName={props.fieldName} filter={props.filter}/>
+                {column.canFilter ? <FilterDropdown column={column}></FilterDropdown> : null}
         </span>
     </th>
 }
